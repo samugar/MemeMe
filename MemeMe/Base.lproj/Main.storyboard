@@ -22,6 +22,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" red="0.59999999999999998" green="0.7725490196" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3D9-C1-T3L">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Pick" id="c7Z-h5-kVL"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -29,12 +35,17 @@
                             <constraint firstItem="F8x-Uw-ASW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3mb-Bq-YKg"/>
                             <constraint firstItem="F8x-Uw-ASW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="140" id="FTS-nV-oda"/>
                             <constraint firstAttribute="trailingMargin" secondItem="F8x-Uw-ASW" secondAttribute="trailing" constant="40" id="NdX-QH-b3E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3D9-C1-T3L" secondAttribute="trailing" constant="-20" id="dr3-5C-5gY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3D9-C1-T3L" secondAttribute="bottom" id="eG1-I3-hVh"/>
+                            <constraint firstItem="3D9-C1-T3L" firstAttribute="top" secondItem="F8x-Uw-ASW" secondAttribute="bottom" constant="116" id="fzJ-gu-nBk"/>
                             <constraint firstItem="F8x-Uw-ASW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="gxx-gl-w0R"/>
+                            <constraint firstItem="3D9-C1-T3L" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="wTy-MZ-xOc"/>
                             <constraint firstItem="F8x-Uw-ASW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zPd-zx-DJq"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="F8x-Uw-ASW"/>
+                                <exclude reference="3D9-C1-T3L"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="3mb-Bq-YKg"/>
@@ -42,12 +53,17 @@
                                 <exclude reference="NdX-QH-b3E"/>
                                 <exclude reference="gxx-gl-w0R"/>
                                 <exclude reference="zPd-zx-DJq"/>
+                                <exclude reference="dr3-5C-5gY"/>
+                                <exclude reference="fzJ-gu-nBk"/>
+                                <exclude reference="wTy-MZ-xOc"/>
                                 <exclude reference="3ei-CI-uRa"/>
+                                <exclude reference="eG1-I3-hVh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="F8x-Uw-ASW"/>
+                                <include reference="3D9-C1-T3L"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="3mb-Bq-YKg"/>
@@ -55,7 +71,11 @@
                                 <include reference="NdX-QH-b3E"/>
                                 <include reference="gxx-gl-w0R"/>
                                 <include reference="zPd-zx-DJq"/>
+                                <include reference="dr3-5C-5gY"/>
+                                <include reference="fzJ-gu-nBk"/>
+                                <include reference="wTy-MZ-xOc"/>
                                 <include reference="3ei-CI-uRa"/>
+                                <include reference="eG1-I3-hVh"/>
                             </mask>
                         </variation>
                     </view>
