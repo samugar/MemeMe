@@ -8,19 +8,36 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imagePickerView: UIImageView!
     
+    let pickerController = UIImagePickerController()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        pickerController.delegate = self
     }
 
-
     @IBAction func pickAnImage(sender: UIBarButtonItem) {
-        let pickerController = UIImagePickerController()
+        
         self.presentViewController(pickerController, animated: true, completion: nil)
+    }
+    
+    //UIImagePickerControllerDelegate Methods
+    
+    func imagePickerController(picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject]){
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imagePickerView.contentMode = .ScaleAspectFit
+            imagePickerView.image = pickedImage
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
