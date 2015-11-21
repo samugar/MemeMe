@@ -27,7 +27,12 @@
                                 <items>
                                     <barButtonItem title="Pick" id="c7Z-h5-kVL">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="g65-kO-pip"/>
+                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="vJ7-j9-MmY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Camera" id="hvF-Ns-X33">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="oX8-4p-La8"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -35,16 +40,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="F8x-Uw-ASW" secondAttribute="bottom" constant="160" id="3ei-CI-uRa"/>
                             <constraint firstItem="F8x-Uw-ASW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3mb-Bq-YKg"/>
-                            <constraint firstItem="F8x-Uw-ASW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="140" id="FTS-nV-oda"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="F8x-Uw-ASW" secondAttribute="trailing" constant="40" id="NdX-QH-b3E"/>
+                            <constraint firstItem="F8x-Uw-ASW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="68e-OR-rsh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3D9-C1-T3L" secondAttribute="trailing" constant="-20" id="dr3-5C-5gY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3D9-C1-T3L" secondAttribute="bottom" id="eG1-I3-hVh"/>
-                            <constraint firstItem="3D9-C1-T3L" firstAttribute="top" secondItem="F8x-Uw-ASW" secondAttribute="bottom" constant="116" id="fzJ-gu-nBk"/>
-                            <constraint firstItem="F8x-Uw-ASW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="gxx-gl-w0R"/>
+                            <constraint firstItem="3D9-C1-T3L" firstAttribute="top" secondItem="F8x-Uw-ASW" secondAttribute="bottom" id="q1e-CE-izK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="F8x-Uw-ASW" secondAttribute="trailing" constant="-20" id="t8m-Cf-xsA"/>
+                            <constraint firstItem="F8x-Uw-ASW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="vwH-7z-LsS"/>
                             <constraint firstItem="3D9-C1-T3L" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="wTy-MZ-xOc"/>
-                            <constraint firstItem="F8x-Uw-ASW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zPd-zx-DJq"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -53,14 +56,12 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="3mb-Bq-YKg"/>
-                                <exclude reference="FTS-nV-oda"/>
-                                <exclude reference="NdX-QH-b3E"/>
-                                <exclude reference="gxx-gl-w0R"/>
-                                <exclude reference="zPd-zx-DJq"/>
+                                <exclude reference="68e-OR-rsh"/>
+                                <exclude reference="t8m-Cf-xsA"/>
+                                <exclude reference="vwH-7z-LsS"/>
                                 <exclude reference="dr3-5C-5gY"/>
-                                <exclude reference="fzJ-gu-nBk"/>
+                                <exclude reference="q1e-CE-izK"/>
                                 <exclude reference="wTy-MZ-xOc"/>
-                                <exclude reference="3ei-CI-uRa"/>
                                 <exclude reference="eG1-I3-hVh"/>
                             </mask>
                         </variation>
@@ -71,24 +72,24 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="3mb-Bq-YKg"/>
-                                <include reference="FTS-nV-oda"/>
-                                <include reference="NdX-QH-b3E"/>
-                                <include reference="gxx-gl-w0R"/>
-                                <include reference="zPd-zx-DJq"/>
+                                <include reference="68e-OR-rsh"/>
+                                <include reference="t8m-Cf-xsA"/>
+                                <include reference="vwH-7z-LsS"/>
                                 <include reference="dr3-5C-5gY"/>
-                                <include reference="fzJ-gu-nBk"/>
+                                <include reference="q1e-CE-izK"/>
                                 <include reference="wTy-MZ-xOc"/>
-                                <include reference="3ei-CI-uRa"/>
                                 <include reference="eG1-I3-hVh"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="hvF-Ns-X33" id="shp-Oj-gMc"/>
                         <outlet property="imagePickerView" destination="F8x-Uw-ASW" id="4vR-sY-Y8O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="138" y="374"/>
         </scene>
     </scenes>
 </document>
