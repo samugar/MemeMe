@@ -11,9 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imagePickerView: UIImageView!
-    
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    
     @IBOutlet weak var textBottom: UITextField!
     @IBOutlet weak var textTop: UITextField!
     
@@ -21,6 +19,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let topTextFieldDelegate = TextFieldDelegate()
     let bottomTextFieldDelegate = TextFieldDelegate()
+    
+    //let meme
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,6 +62,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //Disables camera button if camera not available
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     //Toolbar button actions
