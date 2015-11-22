@@ -8,20 +8,49 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imagePickerView: UIImageView!
     
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
+    @IBOutlet weak var textBottom: UITextField!
+    @IBOutlet weak var textTop: UITextField!
+    
     let pickerController = UIImagePickerController()
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Definition of delegates
+
+        textTop.delegate = self
+        textBottom.delegate = self
         pickerController.delegate = self
+        
+        //UI Initial setup
+        
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : -5
+        ]
+
+        textTop.defaultTextAttributes = memeTextAttributes
+        textTop.textAlignment = .Center
+        textTop.text = "TOP"
+        
+        textBottom.defaultTextAttributes = memeTextAttributes
+        textBottom.textAlignment = .Center
+        textBottom.text = "BOTTOM"
+        
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        
+        
     }
+    
+    //Toolbar button actions
 
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
         pickerController.sourceType = .PhotoLibrary
@@ -47,5 +76,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    //UITextFieldDelegate Methods
+    
+    func textFieldDidBeginEditing(textField: UITextField){
+        
+    }
+    
+//    func textFieldShouldReturn(textField: UITextField){
+//        
+//    }
+
 
 }
