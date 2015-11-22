@@ -1,5 +1,5 @@
 //
-//  TopTextDelegate.swift
+//  TextFieldDelegate.swift
 //  MemeMe
 //
 //  Created by Garcia, Samuel on 22/11/15.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class TopTextDelegate: NSObject, UITextFieldDelegate {
+class TextFieldDelegate: NSObject, UITextFieldDelegate {
 
     var textEdited = false
     

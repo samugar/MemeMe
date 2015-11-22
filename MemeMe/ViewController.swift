@@ -19,8 +19,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let pickerController = UIImagePickerController()
     
-    let topTextDelegate = TopTextDelegate()
-    let bottomTextDelegate = BottomTextDelegate()
+    let topTextFieldDelegate = TextFieldDelegate()
+    let bottomTextFieldDelegate = TextFieldDelegate()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,6 +38,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //Definition of delegates
 
         pickerController.delegate = self
+        textTop.delegate = topTextFieldDelegate
+        textBottom.delegate = bottomTextFieldDelegate
+
         
         //UI Initial setup
         
@@ -51,13 +54,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textTop.defaultTextAttributes = memeTextAttributes
         textTop.textAlignment = .Center
         textTop.text = "TOP"
-        textTop.delegate = topTextDelegate
         
         textBottom.defaultTextAttributes = memeTextAttributes
         textBottom.textAlignment = .Center
         textBottom.text = "BOTTOM"
-        textBottom.delegate = bottomTextDelegate
-        //bottomTextDelegate.theView = view
+        
+        //Disables camera button if camera not available
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
