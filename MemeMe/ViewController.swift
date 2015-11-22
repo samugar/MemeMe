@@ -22,6 +22,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let topTextDelegate = TopTextDelegate()
     let bottomTextDelegate = BottomTextDelegate()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,10 +57,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textBottom.textAlignment = .Center
         textBottom.text = "BOTTOM"
         textBottom.delegate = bottomTextDelegate
+        //bottomTextDelegate.theView = view
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        
-        
     }
     
     //Toolbar button actions
@@ -80,6 +89,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    //Keyboard notification subscription/unsubscription
+
+    func subscribeToKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:" , name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:" , name: UIKeyboardWillHideNotification, object: nil)
+    }
+
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:
+            UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:
+            UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    //Keyboard show/hide behavior
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if (textBottom.isFirstResponder()) {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if (textBottom.isFirstResponder()) {
+            view.frame.origin.y += getKeyboardHeight(notification)
+        }
+    }
+    
+    //Returns keyboard height
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.CGRectValue().height
+    }
 
 
 }

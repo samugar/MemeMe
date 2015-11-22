@@ -13,6 +13,7 @@ import UIKit
 class BottomTextDelegate: NSObject, UITextFieldDelegate {
     
     var textEdited = false
+
     
     func textFieldDidBeginEditing(textField: UITextField){
         if !textEdited
@@ -20,11 +21,21 @@ class BottomTextDelegate: NSObject, UITextFieldDelegate {
             textField.text = ""
             textEdited = true
         }
+        
+        
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+
     }
   
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true;
     }
+    
+    
+
+
     
 }
