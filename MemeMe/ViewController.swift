@@ -19,13 +19,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let pickerController = UIImagePickerController()
     
+    let topTextDelegate = TopTextDelegate()
+    let bottomTextDelegate = BottomTextDelegate()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Definition of delegates
 
-        textTop.delegate = self
-        textBottom.delegate = self
         pickerController.delegate = self
         
         //UI Initial setup
@@ -40,10 +41,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textTop.defaultTextAttributes = memeTextAttributes
         textTop.textAlignment = .Center
         textTop.text = "TOP"
+        textTop.delegate = topTextDelegate
         
         textBottom.defaultTextAttributes = memeTextAttributes
         textBottom.textAlignment = .Center
         textBottom.text = "BOTTOM"
+        textBottom.delegate = bottomTextDelegate
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
@@ -77,15 +80,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //UITextFieldDelegate Methods
-    
-    func textFieldDidBeginEditing(textField: UITextField){
-        
-    }
-    
-//    func textFieldShouldReturn(textField: UITextField){
-//        
-//    }
 
 
 }
