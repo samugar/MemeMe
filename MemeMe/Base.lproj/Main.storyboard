@@ -86,6 +86,10 @@
                         <outlet property="cameraButton" destination="hvF-Ns-X33" id="shp-Oj-gMc"/>
                         <outlet property="imagePickerView" destination="F8x-Uw-ASW" id="4vR-sY-Y8O"/>
                     </connections>
+                    <connections>
+                        <outlet property="imagePickerView" destination="SHr-kS-IZG" id="m6u-TX-lCJ"/>
+                        <outlet property="pickImage" destination="meA-2C-8Zf" id="bDe-KC-Ytq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

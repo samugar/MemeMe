@@ -16,7 +16,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let pickerController = UIImagePickerController()
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerController.delegate = self
@@ -47,5 +47,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+||||||| merged common ancestors
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+=======
+>>>>>>> master
+
+<<<<<<< HEAD
+}
+||||||| merged common ancestors
 
 }
+
+=======
+    @IBAction func pickImage(sender: UIBarButtonItem) {
+    }
+
+}
+
+>>>>>>> master
