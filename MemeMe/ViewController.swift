@@ -9,9 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
+    
+    @IBOutlet weak var toolbarTop: UIToolbar!
+    @IBOutlet weak var toolbarBottom: UIToolbar!
+    
     @IBOutlet weak var imagePickerView: UIImageView!
+    
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
     @IBOutlet weak var textBottom: UITextField!
     @IBOutlet weak var textTop: UITextField!
     
@@ -40,7 +46,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         pickerController.delegate = self
         textTop.delegate = topTextFieldDelegate
         textBottom.delegate = bottomTextFieldDelegate
-
         
         //UI Initial setup
         
@@ -58,6 +63,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textBottom.defaultTextAttributes = memeTextAttributes
         textBottom.textAlignment = .Center
         textBottom.text = "BOTTOM"
+        
+        //Disables Share button until image selected
+        
+        shareButton.enabled = false
         
         //Disables camera button if camera not available
         
@@ -80,6 +89,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
     
+    @IBAction func shareMeme(sender: UIBarButtonItem) {
+        
+        
+        //Just a test
+        imagePickerView.image = generateMemedImage()
+
+    }
+    
     //UIImagePickerControllerDelegate Methods
     
     func imagePickerController(picker: UIImagePickerController,
@@ -87,6 +104,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.contentMode = .ScaleAspectFit
             imagePickerView.image = pickedImage
+            shareButton.enabled = true
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -130,6 +148,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
+    }
+    
+    //Generates memed Image
+    
+    func generateMemedImage() -> UIImage {
+        
+        toolbarTop.hidden = true
+        toolbarBottom.hidden = true
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame,
+            afterScreenUpdates: true)
+        let memedImage : UIImage =
+        UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        toolbarTop.hidden = false
+        toolbarBottom.hidden = false
+        
+        return memedImage
     }
 
 

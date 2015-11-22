@@ -29,7 +29,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Kgd-7B-IZW"/>
-                                    <barButtonItem title="Pick" id="c7Z-h5-kVL">
+                                    <barButtonItem title="Album" id="c7Z-h5-kVL">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="vJ7-j9-MmY"/>
                                         </connections>
@@ -59,11 +59,15 @@
                                     <rect key="frame" x="25" y="79" width="350" height="100"/>
                                 </variation>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxh-XZ-M1I">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxh-XZ-M1I" userLabel="Tool Bar Top">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <barButtonItem width="35" style="plain" systemItem="fixedSpace" id="6fz-Qw-BMd"/>
-                                    <barButtonItem title="Share" id="oRZ-dt-OGj"/>
+                                    <barButtonItem title="Share" id="oRZ-dt-OGj">
+                                        <connections>
+                                            <action selector="shareMeme:" destination="BYZ-38-t0r" id="Mbs-eP-EvR"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="sTV-78-YpP"/>
                                     <barButtonItem title="Cancel" id="pKb-tk-WWz"/>
                                     <barButtonItem width="34" style="plain" systemItem="fixedSpace" id="KRe-sQ-A4U"/>
@@ -150,8 +154,11 @@
                     <connections>
                         <outlet property="cameraButton" destination="hvF-Ns-X33" id="shp-Oj-gMc"/>
                         <outlet property="imagePickerView" destination="F8x-Uw-ASW" id="4vR-sY-Y8O"/>
+                        <outlet property="shareButton" destination="oRZ-dt-OGj" id="DsB-7O-K2s"/>
                         <outlet property="textBottom" destination="qnl-wR-Plb" id="4DA-zY-LjD"/>
                         <outlet property="textTop" destination="rsX-Pn-PQf" id="Kp8-Zr-xqc"/>
+                        <outlet property="toolbarBottom" destination="3D9-C1-T3L" id="BAS-kG-RLt"/>
+                        <outlet property="toolbarTop" destination="Vxh-XZ-M1I" id="aF9-QS-JMe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
