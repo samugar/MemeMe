@@ -51,14 +51,6 @@
                                     <rect key="frame" x="25" y="421" width="350" height="100"/>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rsX-Pn-PQf">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="25" y="79" width="350" height="100"/>
-                                </variation>
-                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxh-XZ-M1I" userLabel="Tool Bar Top">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
@@ -76,17 +68,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
                                 </variation>
                             </toolbar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rsX-Pn-PQf">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="25" y="79" width="350" height="100"/>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="F8x-Uw-ASW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0oU-zc-Fvv"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="F8x-Uw-ASW" secondAttribute="bottom" id="24k-vJ-KDm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vxh-XZ-M1I" secondAttribute="trailing" constant="-20" id="3HB-Mf-aQX"/>
-                            <constraint firstItem="rsX-Pn-PQf" firstAttribute="trailing" secondItem="F8x-Uw-ASW" secondAttribute="trailing" constant="5" id="3SZ-q0-z4S"/>
+                            <constraint firstItem="rsX-Pn-PQf" firstAttribute="trailing" secondItem="F8x-Uw-ASW" secondAttribute="trailing" constant="-20" id="3SZ-q0-z4S"/>
                             <constraint firstItem="3D9-C1-T3L" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EWw-hX-3dr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3D9-C1-T3L" secondAttribute="trailing" constant="-20" id="H5x-Ug-wXs"/>
                             <constraint firstItem="rsX-Pn-PQf" firstAttribute="top" secondItem="Vxh-XZ-M1I" secondAttribute="bottom" constant="35" id="HT2-bE-7Pr"/>
-                            <constraint firstItem="qnl-wR-Plb" firstAttribute="leading" secondItem="F8x-Uw-ASW" secondAttribute="leading" constant="-5" id="R9M-bi-oVb"/>
+                            <constraint firstItem="qnl-wR-Plb" firstAttribute="leading" secondItem="F8x-Uw-ASW" secondAttribute="leading" constant="20" id="R9M-bi-oVb"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3D9-C1-T3L" secondAttribute="bottom" id="SXW-fV-sYK"/>
                             <constraint firstItem="qnl-wR-Plb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ur1-Jr-pkv"/>
                             <constraint firstItem="qnl-wR-Plb" firstAttribute="leading" secondItem="F8x-Uw-ASW" secondAttribute="trailing" constant="-375" id="aTc-ZM-MOr"/>
@@ -105,8 +105,8 @@
                                 <exclude reference="F8x-Uw-ASW"/>
                                 <exclude reference="3D9-C1-T3L"/>
                                 <exclude reference="qnl-wR-Plb"/>
-                                <exclude reference="rsX-Pn-PQf"/>
                                 <exclude reference="Vxh-XZ-M1I"/>
+                                <exclude reference="rsX-Pn-PQf"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="0oU-zc-Fvv"/>
@@ -136,8 +136,8 @@
                                 <include reference="F8x-Uw-ASW"/>
                                 <include reference="3D9-C1-T3L"/>
                                 <include reference="qnl-wR-Plb"/>
-                                <include reference="rsX-Pn-PQf"/>
                                 <include reference="Vxh-XZ-M1I"/>
+                                <include reference="rsX-Pn-PQf"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="0oU-zc-Fvv"/>
