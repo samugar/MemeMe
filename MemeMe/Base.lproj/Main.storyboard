@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -55,14 +56,14 @@
                                 <exclude reference="3D9-C1-T3L"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="eG1-I3-hVh"/>
+                                <exclude reference="dr3-5C-5gY"/>
+                                <exclude reference="q1e-CE-izK"/>
+                                <exclude reference="wTy-MZ-xOc"/>
                                 <exclude reference="3mb-Bq-YKg"/>
                                 <exclude reference="68e-OR-rsh"/>
                                 <exclude reference="t8m-Cf-xsA"/>
                                 <exclude reference="vwH-7z-LsS"/>
-                                <exclude reference="dr3-5C-5gY"/>
-                                <exclude reference="q1e-CE-izK"/>
-                                <exclude reference="wTy-MZ-xOc"/>
-                                <exclude reference="eG1-I3-hVh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -71,24 +72,20 @@
                                 <include reference="3D9-C1-T3L"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="eG1-I3-hVh"/>
+                                <include reference="dr3-5C-5gY"/>
+                                <include reference="q1e-CE-izK"/>
+                                <include reference="wTy-MZ-xOc"/>
                                 <include reference="3mb-Bq-YKg"/>
                                 <include reference="68e-OR-rsh"/>
                                 <include reference="t8m-Cf-xsA"/>
                                 <include reference="vwH-7z-LsS"/>
-                                <include reference="dr3-5C-5gY"/>
-                                <include reference="q1e-CE-izK"/>
-                                <include reference="wTy-MZ-xOc"/>
-                                <include reference="eG1-I3-hVh"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="hvF-Ns-X33" id="shp-Oj-gMc"/>
                         <outlet property="imagePickerView" destination="F8x-Uw-ASW" id="4vR-sY-Y8O"/>
-                    </connections>
-                    <connections>
-                        <outlet property="imagePickerView" destination="SHr-kS-IZG" id="m6u-TX-lCJ"/>
-                        <outlet property="pickImage" destination="meA-2C-8Zf" id="bDe-KC-Ytq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
