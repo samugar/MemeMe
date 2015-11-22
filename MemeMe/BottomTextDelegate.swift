@@ -21,5 +21,10 @@ class BottomTextDelegate: NSObject, UITextFieldDelegate {
             textEdited = true
         }
     }
+  
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
     
 }
