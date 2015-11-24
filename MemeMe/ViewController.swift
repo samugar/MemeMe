@@ -26,7 +26,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let topTextFieldDelegate = TextFieldDelegate()
     let bottomTextFieldDelegate = TextFieldDelegate()
     
-    //let meme
+    
+    //Initialization method overrides
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,6 +78,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
     }
     
+    
     //Toolbar button actions
 
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
@@ -91,11 +93,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         
+        let memedimage = generateMemedImage()
         
-        //Just a test
-        imagePickerView.image = generateMemedImage()
-
+        let controller = UIActivityViewController(activityItems: [memedimage], applicationActivities: nil)
+        
+        controller.completionWithItemsHandler = {
+            
+            (activityType, completed, items, error) in
+            
+            if completed {
+                
+                //Save Meme in object for Meme 2.0
+                let meme = Meme(topText: self.textTop.text, bottomText: self.textBottom.text, image: self.imagePickerView.image, memedImage: memedimage)
+                
+                controller.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+        
+        self.presentViewController(controller, animated: true, completion: nil)
     }
+    
     
     //UIImagePickerControllerDelegate Methods
     
@@ -114,7 +131,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-    //Keyboard notification subscription/unsubscription
+    //Keyboard notification subscription/unsubscription and show/hide behaviors
 
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:" , name: UIKeyboardWillShowNotification, object: nil)
@@ -127,8 +144,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSNotificationCenter.defaultCenter().removeObserver(self, name:
             UIKeyboardWillHideNotification, object: nil)
     }
-    
-    //Keyboard show/hide behavior
     
     func keyboardWillShow(notification: NSNotification) {
         if (textBottom.isFirstResponder()) {
