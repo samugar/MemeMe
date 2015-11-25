@@ -119,11 +119,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
+  
         textTop.text = "TOP"
-        topTextFieldDelegate.textEdited = false
+        topTextFieldDelegate.backToDefault()
         textBottom.text = "BOTTOM"
-        bottomTextFieldDelegate.textEdited = false
+        bottomTextFieldDelegate.backToDefault()
+        
         imagePickerView.image = nil
+        shareButton.enabled = false
     }
     
     

@@ -12,19 +12,28 @@ import UIKit
 
 class TextFieldDelegate: NSObject, UITextFieldDelegate {
 
-    var textEdited = false
+    
+    var defaultText = true
+    
+    //Clear textfield if default text
     
     func textFieldDidBeginEditing(textField: UITextField){
-        if !textEdited
+        if defaultText
         {
             textField.text = ""
-            textEdited = true
+            defaultText = false
         }
     }
+    
+    //Dismiss keyboard on Enter presssed
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true;
+    }
+    
+    func backToDefault(){
+        defaultText = true
     }
     
 }
