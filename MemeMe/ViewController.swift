@@ -6,6 +6,11 @@
 //  Copyright © 2015 SamuGar. All rights reserved.
 //
 
+
+//ToDo: Fix imageview limits
+//ToDo: Fix compilation codes
+//ToDo: Fix rotation before bottom text edition
+
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
@@ -112,6 +117,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.presentViewController(controller, animated: true, completion: nil)
     }
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        textTop.text = "TOP"
+        topTextFieldDelegate.textEdited = false
+        textBottom.text = "BOTTOM"
+        bottomTextFieldDelegate.textEdited = false
+        imagePickerView.image = nil
+    }
+    
     
     
     //UIImagePickerControllerDelegate Methods
