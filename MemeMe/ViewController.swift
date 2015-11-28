@@ -26,8 +26,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textBottom: UITextField!
     @IBOutlet weak var textTop: UITextField!
     
-    let textTopDefaultText = "TOP"
-    let textBottomDefaultText = "BOTTOM"
+    let textTopDefault = "TOP"
+    let textBottomDefault = "BOTTOM"
     
     let pickerController = UIImagePickerController()
     
@@ -68,11 +68,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         textTop.defaultTextAttributes = memeTextAttributes
         textTop.textAlignment = .Center
-        textTop.text = textTopDefaultText
+        textTop.text = textTopDefault
         
         textBottom.defaultTextAttributes = memeTextAttributes
         textBottom.textAlignment = .Center
-        textBottom.text = textBottomDefaultText
+        textBottom.text = textBottomDefault
         
         //Disables Share button until image selected
         
@@ -126,10 +126,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cancel(sender: UIBarButtonItem) {
   
-        textTop.text = textTopDefaultText
+        textTop.text = textTopDefault
         topTextFieldDelegate.backToDefault()
         
-        textBottom.text = textBottomDefaultText
+        textBottom.text = textBottomDefault
         bottomTextFieldDelegate.backToDefault()
         
         imagePickerView.image = nil
