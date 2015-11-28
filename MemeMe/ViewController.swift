@@ -7,9 +7,9 @@
 //
 
 
-//ToDo: Fix imageview limits
+//ToDo: Test on real iPhone
 //ToDo: Fix compilation codes
-//ToDo: Fix rotation before bottom text edition
+
 
 import UIKit
 
@@ -26,10 +26,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textBottom: UITextField!
     @IBOutlet weak var textTop: UITextField!
     
+    let textTopDefaultText = "TOP"
+    let textBottomDefaultText = "BOTTOM"
+    
     let pickerController = UIImagePickerController()
     
     let topTextFieldDelegate = TextFieldDelegate()
     let bottomTextFieldDelegate = TextFieldDelegate()
+    
     
     
     //Initialization method overrides
@@ -64,11 +68,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         textTop.defaultTextAttributes = memeTextAttributes
         textTop.textAlignment = .Center
-        textTop.text = "TOP"
+        textTop.text = textTopDefaultText
         
         textBottom.defaultTextAttributes = memeTextAttributes
         textBottom.textAlignment = .Center
-        textBottom.text = "BOTTOM"
+        textBottom.text = textBottomDefaultText
         
         //Disables Share button until image selected
         
@@ -78,6 +82,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
+    
+    //Hide iOS status bar
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -108,7 +114,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             if completed {
                 
-                //Save Meme in object for Meme 2.0
+                //Save Meme in object for Meme 2.0 (unused object on 1.0)
                 let meme = Meme(topText: self.textTop.text, bottomText: self.textBottom.text, image: self.imagePickerView.image, memedImage: memedimage)
                 
                 controller.dismissViewControllerAnimated(true, completion: nil)
@@ -120,12 +126,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cancel(sender: UIBarButtonItem) {
   
-        textTop.text = "TOP"
+        textTop.text = textTopDefaultText
         topTextFieldDelegate.backToDefault()
-        textBottom.text = "BOTTOM"
+        
+        textBottom.text = textBottomDefaultText
         bottomTextFieldDelegate.backToDefault()
         
         imagePickerView.image = nil
+        
         shareButton.enabled = false
     }
     
@@ -148,7 +156,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-    //Keyboard notification subscription/unsubscription and show/hide behaviors
+    //Keyboard notification subscription/unsubscription and will show/hide behaviors
 
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:" , name: UIKeyboardWillShowNotification, object: nil)
@@ -163,22 +171,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        if (textBottom.isFirstResponder()) {
-            view.frame.origin.y -= getKeyboardHeight(notification)
+        if textBottom.isFirstResponder() {
+            
+            //Only lift frame if originally down
+            //Avoids lifting the frame twice on rotation while kbd is up
+            if (view.frame.origin.y == 0)
+                {
+                    view.frame.origin.y -= getKeyboardHeight(notification)
+                }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if (textBottom.isFirstResponder()) {
+        if textBottom.isFirstResponder() {
             view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
     
-    //Returns keyboard height
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue().height
     }
     
@@ -186,9 +199,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func generateMemedImage() -> UIImage {
         
+        //Hide bars
         toolbarTop.hidden = true
         toolbarBottom.hidden = true
         
+        //Take screen capture
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame,
             afterScreenUpdates: true)
@@ -196,6 +211,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        //Unhide bars
         toolbarTop.hidden = false
         toolbarBottom.hidden = false
         
