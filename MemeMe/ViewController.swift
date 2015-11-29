@@ -54,25 +54,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //Definition of delegates
 
         pickerController.delegate = self
-        textTop.delegate = topTextFieldDelegate
-        textBottom.delegate = bottomTextFieldDelegate
         
-        //UI Initial setup
+        //Textfields Initial setup
         
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : -5
-        ]
-
-        textTop.defaultTextAttributes = memeTextAttributes
-        textTop.textAlignment = .Center
-        textTop.text = textTopDefault
-        
-        textBottom.defaultTextAttributes = memeTextAttributes
-        textBottom.textAlignment = .Center
-        textBottom.text = textBottomDefault
+        setTextField(textTop, delegate:topTextFieldDelegate, initialText: textTopDefault)
+        setTextField(textBottom, delegate:bottomTextFieldDelegate, initialText: textBottomDefault)
         
         //Disables Share button until image selected
         
@@ -94,12 +80,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
         pickerController.sourceType = .PhotoLibrary
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        presentViewController(pickerController, animated: true, completion: nil)
     }
     
     @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
         pickerController.sourceType = .Camera
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        presentViewController(pickerController, animated: true, completion: nil)
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {
@@ -125,12 +111,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-  
-        textTop.text = textTopDefault
-        topTextFieldDelegate.backToDefault()
         
-        textBottom.text = textBottomDefault
-        bottomTextFieldDelegate.backToDefault()
+        setTextField(textTop, delegate:topTextFieldDelegate, initialText: textTopDefault)
+        setTextField(textBottom, delegate:bottomTextFieldDelegate, initialText: textBottomDefault)
         
         imagePickerView.image = nil
         
@@ -216,6 +199,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         toolbarBottom.hidden = false
         
         return memedImage
+    }
+    
+    //Initialise text fields
+    
+    func setTextField(field: UITextField!, delegate: TextFieldDelegate, initialText: String!){
+        
+        delegate.backToDefault()
+        field.delegate = delegate
+        
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : -5
+        ]
+
+        field.defaultTextAttributes = memeTextAttributes
+        field.textAlignment = .Center
+        field.text = initialText
+        
     }
 
 
