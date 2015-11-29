@@ -24,19 +24,65 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     @IBOutlet weak var textBottom: UITextField!
-    @IBOutlet weak var textTop: UITextField!
-    
-    let textTopDefault = "TOP"
     let textBottomDefault = "BOTTOM"
+    let bottomTextFieldDelegate = TextFieldDelegate()
+    
+    @IBOutlet weak var textTop: UITextField!
+    let textTopDefault = "TOP"
+    let topTextFieldDelegate = TextFieldDelegate()
     
     let pickerController = UIImagePickerController()
     
-    let topTextFieldDelegate = TextFieldDelegate()
-    let bottomTextFieldDelegate = TextFieldDelegate()
+    // Struct to save memes
+    struct Meme {
+        var textTop: String!
+        var textBottom: String!
+        var image: UIImage!
+        var memedImage: UIImage!
+    }
     
     
+    //UI Initialization
     
-    //Initialization method overrides
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        //Used on initialization and on reset of interface elements
+
+        imagePickerView.image = nil
+        pickerController.delegate = self
+        
+        iniTextField(textTop, delegate:topTextFieldDelegate, initialText: textTopDefault)
+        iniTextField(textBottom, delegate:bottomTextFieldDelegate, initialText: textBottomDefault)
+        
+        //Disables Share button until image selected
+        
+        shareButton.enabled = false
+        
+        //Disables camera button if camera not available
+        
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    //Initialise text fields
+    
+    func iniTextField(field: UITextField!, delegate: TextFieldDelegate, initialText: String!){
+        
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : -5
+        ]
+        
+        field.defaultTextAttributes = memeTextAttributes
+        field.textAlignment = .Center
+        field.text = initialText
+        field.delegate = delegate
+        
+        delegate.backToDefault()
+        
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,27 +92,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //Definition of delegates
-
-        pickerController.delegate = self
-        
-        //Textfields Initial setup
-        
-        setTextField(textTop, delegate:topTextFieldDelegate, initialText: textTopDefault)
-        setTextField(textBottom, delegate:bottomTextFieldDelegate, initialText: textBottomDefault)
-        
-        //Disables Share button until image selected
-        
-        shareButton.enabled = false
-        
-        //Disables camera button if camera not available
-        
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
     
     //Hide iOS status bar
@@ -90,9 +115,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         
-        let memedimage = generateMemedImage()
+        let memedImage = generateMemedImage()
         
-        let controller = UIActivityViewController(activityItems: [memedimage], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
         controller.completionWithItemsHandler = {
             
@@ -100,8 +125,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             if completed {
                 
-                //Save Meme in object for Meme 2.0 (unused object on 1.0)
-                let meme = Meme(topText: self.textTop.text, bottomText: self.textBottom.text, image: self.imagePickerView.image, memedImage: memedimage)
+                //Need to pass parameters to saveMeme function as I already have the memedImage
+                self.saveMeme(self.textTop.text, textBottom: self.textBottom.text, image: self.imagePickerView.image, memedImage: memedImage)
                 
                 controller.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -112,15 +137,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         
-        setTextField(textTop, delegate:topTextFieldDelegate, initialText: textTopDefault)
-        setTextField(textBottom, delegate:bottomTextFieldDelegate, initialText: textBottomDefault)
-        
-        imagePickerView.image = nil
-        
-        shareButton.enabled = false
+        //Reset interface
+        viewDidLoad()
     }
-    
-    
     
     //UIImagePickerControllerDelegate Methods
     
@@ -154,10 +173,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillShow(notification: NSNotification) {
+        
         if textBottom.isFirstResponder() {
             
-            //Only lift frame if originally down
-            //Avoids lifting the frame twice on rotation while kbd is up
+            //Only move frame up if currently in origin 0
+            //Avoids lifting the frame twice on rotation while keyboard is up
             if (view.frame.origin.y == 0)
                 {
                     view.frame.origin.y -= getKeyboardHeight(notification)
@@ -166,8 +186,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        
         if textBottom.isFirstResponder() {
-            view.frame.origin.y += getKeyboardHeight(notification)
+            
+            //Move frame back to 0
+            view.frame.origin.y = 0
         }
     }
     
@@ -201,25 +224,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
     
-    //Initialise text fields
     
-    func setTextField(field: UITextField!, delegate: TextFieldDelegate, initialText: String!){
+    func saveMeme(textTop: String!, textBottom:String!, image:UIImage!, memedImage:UIImage!){
         
-        delegate.backToDefault()
-        field.delegate = delegate
-        
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : -5
-        ]
-
-        field.defaultTextAttributes = memeTextAttributes
-        field.textAlignment = .Center
-        field.text = initialText
-        
+        //Just saving to the Meme struct for usage on MemeMe 2.0
+        let meme = Meme(textTop: textTop, textBottom: textBottom, image: image, memedImage: memedImage)
     }
-
-
+    
 }
